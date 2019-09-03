@@ -1,5 +1,7 @@
 package leetcode
 
+import "fmt"
+
 type TreeNode struct {
 	Val   int
 	Left  *TreeNode
@@ -9,4 +11,12 @@ type TreeNode struct {
 type ListNode struct {
 	Val  int
 	Next *ListNode
+}
+
+func printList(head *ListNode) {
+	fmt.Printf("%d", head.Val)
+	if head.Next != nil {
+		fmt.Printf("->")
+		printList(head.Next)
+	}
 }
