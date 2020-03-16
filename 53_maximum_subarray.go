@@ -55,3 +55,19 @@ func max(a, b int) int {
 	}
 	return b
 }
+
+func maxSubArray3(nums []int) int {
+	if len(nums) == 1 {
+		return nums[0]
+	}
+
+	current := nums[len(nums)-1]
+	maxSum := nums[len(nums)-1]
+
+	for i := len(nums) - 1 - 1; i >= 0; i-- {
+		current = max(nums[i], current+nums[i])
+		maxSum = max(current, maxSum)
+	}
+
+	return max(maxSubArray3(nums[:len(nums)-1]), maxSum)
+}

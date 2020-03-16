@@ -30,3 +30,19 @@ func uniquePathsWithCache(m, n int, cache map[int]map[int]int) int {
 
 	return result
 }
+
+func uniquePaths2(m int, n int) int {
+	result := make(map[int]map[int]int)
+	for i := 1; i <= m; i++ {
+		if result[i] == nil {
+			result[i] = make(map[int]int)
+		}
+		result[i][1] = 1
+
+		for j := 2; j <= n; j++ {
+			result[i][j] = result[i-1][j] + result[i][j-1]
+		}
+	}
+
+	return result[m][n]
+}
