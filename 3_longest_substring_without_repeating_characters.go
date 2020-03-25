@@ -6,26 +6,27 @@ func lengthOfLongestSubstring(s string) int {
 	}
 
 	length := 0
-	for i := range s {
-		exist := make(map[byte]int)
-		exist[s[i]] = i
-		flag := 0
-		for j := i + 1; j < len(s); j++ {
-			if _, ok := exist[s[j]]; ok {
-				if (j - i) > length {
-					length = (j - i)
+	exist := map[byte]int{
+		s[0]: 0,
+	}
+	start := 0
+	for end := 1; end < len(s); end++ {
+		if len(s)-start <= length {
+			break
+		}
+
+		if index, ok := exist[s[end]]; ok {
+			if index >= start {
+				if end-start > length {
+					length = end - start
 				}
-				flag = 1
-				break
+				start = index + 1
 			}
-			exist[s[j]] = j
 		}
-		if flag == 0 {
-			if len(s)-i > length {
-				length = len(s) - i
-			}
-			return length
-		}
+		exist[s[end]] = end
+	}
+	if len(s)-start > length {
+		length = len(s) - start
 	}
 
 	return length
