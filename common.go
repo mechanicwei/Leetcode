@@ -20,3 +20,20 @@ func printList(head *ListNode) {
 		printList(head.Next)
 	}
 }
+
+func buildList(data []int) *ListNode {
+	if len(data) == 0 {
+		return nil
+	}
+
+	head := &ListNode{}
+	current := head
+	for _, val := range data {
+		current.Next = &ListNode{
+			Val: val,
+		}
+		current = current.Next
+	}
+
+	return head.Next
+}
